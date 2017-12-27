@@ -12068,11 +12068,12 @@ div#notebook {
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p><strong>Answer:</strong></p>
+<p><strong>Answer:</strong><br>
+These are my best guesses considering the distribution of purchase cost across categories in <code>samples</code>.</p>
 <ol>
-<li>The first customer has an overall high total purchase cost, somewhat evenly distributed across all food categories, but not so much in detergents. This looks like a purchase pattern of a restaurant.</li>
-<li>The second customer has small purchases indicating an individual customer rather than an organization. High consumption of frozen items <em>probably</em> indicates a bachelor, but I should not jump to conclusions.</li>
-<li>The third customer has an overall high total purchase cost. High consumption of grocery, fresh, milk and detergents and low consumption of Frozen and Delicatessen indicates a hotel.</li>
+<li>The first customer has an overall high total purchase cost. All the costs in the 6 categories are in fourth quartile (Q4) of the respective category. This looks like a purchase pattern of a supermarket.</li>
+<li>The second customer has small purchases indicating an individual customer rather than an organization. The purchases of this entity in each category will fall in either the Q2 or Q1 of the respective category. What stands out, however, is the relatively high consumption of frozen items (44%) considering the overall purchase of the individual. This <em>probably</em> indicates a bachelor, but I should not jump to conclusions.</li>
+<li>The third customer has an overall high total purchase cost. The consumption of Milk, Grocery and Detergents are in Q4, and Fresh is in Q3. The purchase of Delicatessen is barely above the median, and the purchase of Frozen items below the respective median of the category. I would probably peg this pattern to a restaurant.</li>
 </ol>
 
 </div>
@@ -23898,9 +23899,9 @@ fzmKI26Zh89hAAAAAElFTkSuQmCC
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p><strong>Answer:</strong><br>
-K-means culustering is good for hard cluster assignments, i.e., it is suitable for situations where a data point surely belongs to one cluster over another. It is easy to implement and the result is easy to interpret.</p>
+K-means culustering is good for hard cluster assignments, i.e., it is suitable for situations where a data point surely belongs to one cluster over another. It is easy to implement and the result is easy to interpret. Also, it is faster for a high dimensional data with small values of K.</p>
 <p>Gaussian Mixture Model clustering is preferable for soft clustering, i.e., when we are not sure if a point belongs to one cluster over another.</p>
-<p>In this problem, we are attempting to map data points to establishment types. Hence, it is probably sensible to use K-Means.</p>
+<p>In this problem, we are attempting to map data points to establishment types. For that and for computational efficiency, it is probably sensible to use K-Means.</p>
 
 </div>
 </div>
@@ -25459,8 +25460,8 @@ TkSuQmCC
 <div class="text_cell_render border-box-sizing rendered_html">
 <p><strong>Answer:</strong></p>
 <ul>
-<li>Segment 0 - More than 50% of the total purchase is Fresh. Combined with grocery and frozen items account for 82% of the total purchase. This probably represents restaurants.</li>
-<li>Segment 1 - Grocery is the leading category here. Grocery combined with milk and detergent_paper accounts for 80% of the purchase. This is likely to be supermarkets.</li>
+<li>Segment 0 - The purchase of Fresh is just above the median, and those of Milk, Grocery and Detergents have barely made it past the Q1 of their respective categories. More than 50% of the total purchase is Fresh. Combined with grocery and frozen items account for 82% of the total purchase. This probably represents restaurants.</li>
+<li>Segment 1 - Grocery, Milk and Detergents purchases are in their 4th Quartiles of respective categories, while Frozen and Delicatessen are in Q3. Grocery combined with milk and detergent_paper accounts for 80% of the purchase. This is likely to be supermarkets.</li>
 </ul>
 
 </div>
@@ -25667,7 +25668,7 @@ Sample point 2 predicted to be in Segment 1
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p><strong>Answer:</strong>  I made the guesses based on relative weights of the purchases in the categories. The predictions confirm the conjectures.</p>
+<p><strong>Answer:</strong>  Based on the values and relative weights of the features of each sample and the cluster centers, Sample 0 and Sample 2 seem to be similar to Segment 1. Sample 1 seems to be similar to Segment 0. The predictions confirm the guesses.</p>
 
 </div>
 </div>
@@ -25708,7 +25709,7 @@ Sample point 2 predicted to be in Segment 1
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p><strong>Answer:</strong><br>
-Ideally, separate A/B testing should be done on the cluster segments. In other worrds, experiment and control groups should be from the same cluster, at a time. For example, the distributor can classify custmers as restaurant or supermarket, and then for each of these categories, create groups for 5 days a week and 3 days a week delivery schedules.</p>
+Ideally, separate A/B testing should be done on the cluster segments. In other words, experiment and control groups should be from the same cluster, at a time. For example, the distributor can classify custmers as restaurant or supermarket, and then for each of these categories, create groups for 5 days a week and 3 days a week delivery schedules.</p>
 
 </div>
 </div>
