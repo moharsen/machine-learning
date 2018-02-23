@@ -16317,39 +16317,56 @@ QRxgmZmZmZmZNYgDLDMzMzMzswZxgGVmZmZmZtYg/w/ZrZ2N553OugAAAABJRU5ErkJggg==
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p><strong>Answer:</strong></p>
-<ol>
-<li>I can think of the following policys as optimal for avoiding traffic violations and reaching the destination:</li>
-</ol>
-<p>Case 1: Waypoint is 'forward':
-    If light is green, go FORWARD
-    If light is red, STOP</p>
-<p>Case 2: Waypoint is 'left':
-    If light is green, no oncoming traffic, go LEFT
-    If light is green, with oncoming traffic, STOP
-    If light is red, STOP</p>
-<p>Case 3: Waypoint is 'right':
-    If light is green, go RIGHT
-    If light is red, with oncoming traffic to the left, STOP, else go RIGHT</p>
-<ol>
+<ul>
+<li><p>I can think of the following policys as optimal for avoiding traffic violations and reaching the destination:</p>
+
+<pre><code>  If waypoint is forward, agent should only move FORWARD
+  1.  Light is green AND
+  2.  Oncoming traffic is NOT turning left AND
+  3.  Traffic on the left is absent or turning right
+  Otherwise, agent should STOP</code></pre>
+</li>
+</ul>
+
+<pre><code>    If waypoint is left, agent should only move LEFT if
+    1.  Light is green AND
+    2.  Oncoming traffic is either absent or turning left AND
+    3.  Traffic on the left is either absent or turning right
+    Otherwise, agent should STOP
+
+
+
+    If waypoint is right, agent should only move RIGHT if
+    1.  Oncoming traffic is not turning left AND
+    2.  Traffic on the left is not moving forward
+    Otherwise, agent should STOP
+
+
+
+
+
+</code></pre>
+<ul>
 <li><p>Checking the 'sim_improved-learning.txt', most of the policies are optimal. Some are not, however, which shows that the Q-learner has not learnt all the optimal policies</p>
 </li>
-<li><p>For example, when waypoint is 'left' and light is green, moving 'FORWARD' has the highest reward, and stopping is penalized:
+<li><p>For example, when waypoint is 'left' and light is green, with no oncoming traffic, traffic from the left turning left, moving 'LEFT' has the highest reward, and stopping is penalized:
 ('left', 'green', 'left', None)
 -- forward : 0.98
 -- right : 1.07
 -- None : -4.77
 -- left : 1.73</p>
 </li>
-</ol>
-<p>Similarly, when waypoint is 'right', light is 'red' and traffic on the left moves left, oncoming traffic is moving right, the optimal policy is to turn RIGHT.</p>
+<li><p>Similarly, when waypoint is 'right', light is 'red', no oncoming traffic, traffic on the left moves left, the optimal policy is to turn RIGHT.</p>
+</li>
+</ul>
 <p>('right', 'red', 'left', 'right')
  -- forward : 0.00
  -- right : 1.50
  -- None : 0.00
  -- left : -4.68</p>
-<ol>
+<ul>
 <li>However, when waypoint is left, light is red, optimal policy should be to STOP, which this policy misses:</li>
-</ol>
+</ul>
 <p>('left', 'red', 'right', 'right')
  -- forward : 0.00
  -- right : 0.98
